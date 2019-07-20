@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Header from './components/header/header.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import Checkout from './pages/checkout/checkout.component';
 import Homepage from './pages/homepage/homepage.component';
 import Shop from './pages/shop/shop.component';
 import SignInSignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
@@ -42,6 +43,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/shop" component={Shop} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route
             exact
             path="/signin"
