@@ -1,4 +1,4 @@
-const SHOP_DATA = [
+const collections = [
   {
     id: 1,
     title: 'Hats',
@@ -246,4 +246,4 @@ const SHOP_DATA = [
   }
 ];
 
-export { SHOP_DATA };
+export { collections };
