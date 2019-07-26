@@ -4,17 +4,22 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import './collection.styles.scss';
 
-const Collection = ({ collection }) => {
-  const { title, items } = collection;
-  const itemsList = items.map(item => (
-    <CollectionItem key={item.id} item={item} />
-  ));
-  return (
-    <div className="collection">
-      <h2 className="title">{title}</h2>
-      <div className="items">{itemsList}</div>
-    </div>
-  );
+const Collection = ({ collection, history }) => {
+  if (!collection) {
+    history.push('/');
+    return null;
+  } else {
+    const { title, items } = collection;
+    const itemsList = items.map(item => (
+      <CollectionItem key={item.id} item={item} />
+    ));
+    return (
+      <div className="collection">
+        <h2 className="title">{title}</h2>
+        <div className="items">{itemsList}</div>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state, ownProps) => ({
