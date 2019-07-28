@@ -7,9 +7,9 @@ export const selectCollections = createSelector(
   shop => shop.collections
 );
 
-export const selectCollectionsAsArray = createSelector(
+export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.values(collections)
+  collections => Object.keys(collections).map(key => collections[key])
 );
 
 export const selectCollection = collectionUrlParam =>
