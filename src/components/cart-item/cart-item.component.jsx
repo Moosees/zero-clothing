@@ -1,16 +1,20 @@
 import React, { memo } from 'react';
-import './cart-item.styles.scss';
+import {
+  ItemContainer,
+  ImageContainer,
+  DetailsContainer
+} from './cart-item.styles';
 
 const CartItem = ({ item: { imageUrl, name, price, quantity } }) => (
-  <div className="cart-item">
-    <img src={imageUrl} alt={name} className="cart-image" />
-    <div className="item-details">
-      <span className="name">{name}</span>
-      <span className="price">
+  <ItemContainer>
+    <ImageContainer src={imageUrl} alt={name} />
+    <DetailsContainer>
+      <span>{name}</span>
+      <span>
         {quantity} x {price}
       </span>
-    </div>
-  </div>
+    </DetailsContainer>
+  </ItemContainer>
 );
 
 export default memo(CartItem);
