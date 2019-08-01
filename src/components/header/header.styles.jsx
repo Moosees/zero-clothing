@@ -5,14 +5,16 @@ export const HeaderContainer = styled.div`
   display: flex;
   height: 70px;
   justify-content: space-between;
-  margin-bottom: 25px;
-  width: 100%;
+  margin: 0 auto 25px;
+  width: 90vw;
 `;
 
 export const LogoContainer = styled(Link)`
-  height: 100%;
-  padding: 25px;
-  width: 70px;
+  height: 49px;
+  padding: 5px;
+  position: relative;
+  top: 15px;
+  width: 60px;
 `;
 
 export const OptionsContainer = styled.div`
