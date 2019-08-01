@@ -13,7 +13,7 @@ export const LogoContainer = styled(Link)`
   height: 49px;
   padding: 5px;
   position: relative;
-  top: 15px;
+  top: 8px;
   width: 60px;
 `;
 
