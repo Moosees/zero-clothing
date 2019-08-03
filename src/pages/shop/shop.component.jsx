@@ -1,32 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
-import Collection from '../collection/collection.component';
+import withSpinner from '../../components/with-spinner/with.spinner.component';
 import {
-  firestore,
-  convertCollectionsSnapshotToMap
+  convertCollectionsSnapshotToMap,
+  firestore
 } from '../../firebase/firebase.utils.js';
-import { connect } from 'react-redux';
 import { updateCollections } from '../../redux/shop/shop.actions.js';
+import Collection from '../collection/collection.component';
+
+const CollectionsOverviewWithSpinner = withSpinner(CollectionsOverview);
+const CollectionWithSpinner = withSpinner(Collection);
 
 class Shop extends Component {
+  state = {
+    isLoading: true
+  };
+
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
     const { updateCollections } = this.props;
     const collectionsRef = firestore.collection('collections');
-    collectionsRef.onSnapshot(async snapshot => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+    this.unsubscribeFromSnapshot = collectionsRef.onSnapshot(async snapshot => {
+      const collectionsMap = await convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
+      this.setState({ isLoading: false });
     });
   }
 
+  componentWillUnmount() {
+    this.unsubscribeFromSnapshot();
+  }
+
   render() {
-    const match = this.props;
+    const { match } = this.props;
+    const { isLoading } = this.state;
+
     return (
       <>
-        <Route exact path={`${match.path}`} component={CollectionsOverview} />
-        <Route path={`${match.path}/:collectionId`} component={Collection} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={props => (
+            <CollectionsOverviewWithSpinner isLoading={isLoading} {...props} />
+          )}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          render={props => (
+            <CollectionWithSpinner isLoading={isLoading} {...props} />
+          )}
+        />
       </>
     );
   }
