@@ -26,5 +26,5 @@ export const selectIsCollectionsFetching = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  shop => !!shop.collections //converts object to boolean
+  shop => !shop.isFetching && !!shop.collections
 );
