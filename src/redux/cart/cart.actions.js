@@ -6,7 +6,7 @@ export const addItemToCart = item => ({
 });
 
 export const clearItemFromCart = item => ({
-  type: CartActionTypes.CLEAR_ITEM_FROM_CART,
+  type: CartActionTypes.CLEAR_ITEM,
   payload: item
 });
 
@@ -17,4 +17,8 @@ export const removeItemFromCart = item => ({
 
 export const toggleCartHidden = () => ({
   type: CartActionTypes.TOGGLE_CART_HIDDEN
+});
+
+export const emptyCart = () => ({
+  type: CartActionTypes.EMPTY_CART
 });
