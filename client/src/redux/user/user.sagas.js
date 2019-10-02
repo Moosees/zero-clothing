@@ -15,7 +15,7 @@ import {
 } from './user.actions';
 import UserActionTypes from './user.types';
 
-export function* getSnapshotFromUserAuth(user, { displayName }) {
+export function* getSnapshotFromUserAuth(user, displayName) {
   try {
     const userRef = yield call(createUserProfileDocument, user, {
       displayName
@@ -78,7 +78,7 @@ export function* signUp({ payload: { displayName, email, password } }) {
 
 export function* signUpSuccessSignIn({ payload: { user, displayName } }) {
   try {
-    yield getSnapshotFromUserAuth(user, { displayName });
+    yield getSnapshotFromUserAuth(user, displayName);
   } catch (error) {
     yield put(signInFailure(error));
   }
